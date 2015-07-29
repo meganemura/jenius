@@ -10,25 +10,39 @@ definitions:
   id:
     description: unique identifier of annotation
     readOnly: true
-    format: uuid
-    type:
-    - integer
+    type: integer
   text_format:
-    type:
-    - string
+    type: string
   identity:
     anyOf:
     - "$ref": "/schemata/annotation#/definitions/id"
-  created_at:
-    description: when annotation was created
-    format: date-time
-    type:
-    - string
-  updated_at:
-    description: when annotation was updated
-    format: date-time
-    type:
-    - string
+  body:
+    anyOf:
+    - "$ref": "/schemata/annotation#/definitions/plain"
+    - "$ref": "/schemata/annotation#/definitions/dom"
+    - "$ref": "/schemata/annotation#/definitions/html"
+  plain:
+    type: string
+  dom:
+    type: object
+  html:
+    type: string
+  authors:
+    type: object
+  verified_by:
+    type: object
+  votes_total:
+    type: integer
+  share_url:
+    type: string
+  current_user_metadata:
+    type: object
+  state:
+    type: string
+  comment_count:
+    type: integer
+  url:
+    type: string
 links:
 - description: Data for a specific annotation.
   href: "/annotations/{(%2Fschemata%2Fannotation%23%2Fdefinitions%2Fidentity)}"
