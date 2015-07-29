@@ -3,3 +3,10 @@ links:
 - href: https://api.genius.com
   rel: self
 title: Genius API
+properties:
+  meta:
+    - "$ref": "#/definitions/meta"
+  data:
+    type: object
+    anyOf:
+    - "$ref": "#/definitions/annotation"
