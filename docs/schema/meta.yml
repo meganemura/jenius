@@ -9,9 +9,12 @@ definitions:
     description: FIXME meta
     type: object
     definitions:
-      code:
+      status:
         type:
         - integer
+      message:
+        type:
+        - string
   response:
     title: response
     description: FIXME response
