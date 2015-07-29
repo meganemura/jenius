@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Referent
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of referent
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of referent
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/referent#/definitions/id"
+    - "$ref": "/schemata/referent#/definitions/name"
+  created_at:
+    description: when referent was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when referent was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new referent.
+  href: "/referents"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing referent.
+  href: "/referents/{(%2Fschemata%2Freferent%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing referent.
+  href: "/referents/{(%2Fschemata%2Freferent%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing referents.
+  href: "/referents"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing referent.
+  href: "/referents/{(%2Fschemata%2Freferent%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/referent#/definitions/created_at"
+  id:
+    "$ref": "/schemata/referent#/definitions/id"
+  name:
+    "$ref": "/schemata/referent#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/referent#/definitions/updated_at"
+id: schemata/referent
