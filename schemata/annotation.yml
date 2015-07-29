@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Annotation
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of annotation
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of annotation
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/annotation#/definitions/id"
+    - "$ref": "/schemata/annotation#/definitions/name"
+  created_at:
+    description: when annotation was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when annotation was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new annotation.
+  href: "/annotations"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing annotation.
+  href: "/annotations/{(%2Fschemata%2Fannotation%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing annotation.
+  href: "/annotations/{(%2Fschemata%2Fannotation%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing annotations.
+  href: "/annotations"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing annotation.
+  href: "/annotations/{(%2Fschemata%2Fannotation%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/annotation#/definitions/created_at"
+  id:
+    "$ref": "/schemata/annotation#/definitions/id"
+  name:
+    "$ref": "/schemata/annotation#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/annotation#/definitions/updated_at"
+id: schemata/annotation
