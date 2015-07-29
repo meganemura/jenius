@@ -1,0 +1,5 @@
+description: Genius API
+links:
+- href: https://api.genius.com
+  rel: self
+title: Genius API
