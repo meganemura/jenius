@@ -3,10 +3,22 @@ links:
 - href: https://api.genius.com
   rel: self
 title: Genius API
+definitions:
+  meta:
+    title: meta
+    description: FIXME meta
+    type: object
+    definitions:
+      code:
+        type:
+        - integer
+  response:
+    title: response
+    description: FIXME response
 properties:
   meta:
-    - "$ref": "#/definitions/meta"
-  data:
+    "$ref": "#/definitions/meta"
+  response:
     type: object
     anyOf:
     - "$ref": "#/definitions/annotation"
