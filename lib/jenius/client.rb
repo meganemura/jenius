@@ -90,6 +90,20 @@ module Jenius
       @client = client
     end
 
+    # FIXME meta
+    #
+    # @return [Meta]
+    def meta
+      @meta_resource ||= Meta.new(@client)
+    end
+
+    # FIXME response
+    #
+    # @return [Response]
+    def response
+      @response_resource ||= Response.new(@client)
+    end
+
     # FIXME
     #
     # @return [Account]
@@ -97,7 +111,7 @@ module Jenius
       @account_resource ||= Account.new(@client)
     end
 
-    # FIXME
+    # Annotation Object
     #
     # @return [Annotation]
     def annotation
@@ -142,6 +156,20 @@ module Jenius
 
   private
 
+  # FIXME meta
+  class Meta
+    def initialize(client)
+      @client = client
+    end
+  end
+
+  # FIXME response
+  class Response
+    def initialize(client)
+      @client = client
+    end
+  end
+
   # FIXME
   class Account
     def initialize(client)
@@ -183,13 +211,20 @@ module Jenius
     end
   end
 
-  # FIXME
+  # Annotation Object
   class Annotation
     def initialize(client)
       @client = client
     end
 
-    # Create a new annotation.
+    # Data for a specific annotation.
+    #
+    # @param annotation_id: unique identifier of annotation
+    def info(annotation_id)
+      @client.annotation.info(annotation_id)
+    end
+
+    # Creates a new annotation on a public web page.
     #
     # @param body: the object to pass as the request payload
     def create(body)
@@ -198,16 +233,9 @@ module Jenius
 
     # Delete an existing annotation.
     #
-    # @param annotation_id_or_annotation_name: unique identifier of annotation or unique name of annotation
-    def delete(annotation_id_or_annotation_name)
-      @client.annotation.delete(annotation_id_or_annotation_name)
-    end
-
-    # Info for existing annotation.
-    #
-    # @param annotation_id_or_annotation_name: unique identifier of annotation or unique name of annotation
-    def info(annotation_id_or_annotation_name)
-      @client.annotation.info(annotation_id_or_annotation_name)
+    # @param annotation_id: unique identifier of annotation
+    def delete(annotation_id)
+      @client.annotation.delete(annotation_id)
     end
 
     # List existing annotations.
@@ -217,10 +245,10 @@ module Jenius
 
     # Update an existing annotation.
     #
-    # @param annotation_id_or_annotation_name: unique identifier of annotation or unique name of annotation
+    # @param annotation_id: unique identifier of annotation
     # @param body: the object to pass as the request payload
-    def update(annotation_id_or_annotation_name, body)
-      @client.annotation.update(annotation_id_or_annotation_name, body)
+    def update(annotation_id, body)
+      @client.annotation.update(annotation_id, body)
     end
   end
 
@@ -436,6 +464,29 @@ module Jenius
     "object"
   ],
   "definitions": {
+    "meta": {
+      "title": "meta",
+      "description": "FIXME meta",
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "status": {
+          "type": [
+            "integer"
+          ]
+        },
+        "message": {
+          "type": [
+            "string"
+          ]
+        }
+      }
+    },
+    "response": {
+      "title": "response",
+      "description": "FIXME response"
+    },
     "account": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "FIXME - Account",
@@ -554,8 +605,8 @@ module Jenius
     },
     "annotation": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "FIXME - Annotation",
-      "description": "FIXME",
+      "title": "Annotation",
+      "description": "Annotation Object",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -565,14 +616,11 @@ module Jenius
         "id": {
           "description": "unique identifier of annotation",
           "readOnly": true,
-          "format": "uuid",
           "type": [
-            "string"
+            "integer"
           ]
         },
-        "name": {
-          "description": "unique name of annotation",
-          "readOnly": true,
+        "text_format": {
           "type": [
             "string"
           ]
@@ -581,22 +629,73 @@ module Jenius
           "anyOf": [
             {
               "$ref": "#/definitions/annotation/definitions/id"
-            },
-            {
-              "$ref": "#/definitions/annotation/definitions/name"
             }
           ]
         },
-        "created_at": {
-          "description": "when annotation was created",
-          "format": "date-time",
+        "body": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/annotation/definitions/plain"
+            },
+            {
+              "$ref": "#/definitions/annotation/definitions/dom"
+            },
+            {
+              "$ref": "#/definitions/annotation/definitions/html"
+            }
+          ]
+        },
+        "plain": {
           "type": [
             "string"
           ]
         },
-        "updated_at": {
-          "description": "when annotation was updated",
-          "format": "date-time",
+        "dom": {
+          "type": [
+            "object"
+          ]
+        },
+        "html": {
+          "type": [
+            "string"
+          ]
+        },
+        "authors": {
+          "type": [
+            "object"
+          ]
+        },
+        "verified_by": {
+          "type": [
+            "object"
+          ]
+        },
+        "votes_total": {
+          "type": [
+            "integer"
+          ]
+        },
+        "share_url": {
+          "type": [
+            "string"
+          ]
+        },
+        "current_user_metadata": {
+          "type": [
+            "object"
+          ]
+        },
+        "state": {
+          "type": [
+            "string"
+          ]
+        },
+        "comment_count": {
+          "type": [
+            "integer"
+          ]
+        },
+        "url": {
           "type": [
             "string"
           ]
@@ -604,16 +703,54 @@ module Jenius
       },
       "links": [
         {
-          "description": "Create a new annotation.",
+          "description": "Data for a specific annotation.",
+          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "Creates a new annotation on a public web page.",
           "href": "/annotations",
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
             "type": [
               "object"
-            ]
+            ],
+            "properties": {
+              "annotation": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "body": {
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "markdown": {
+                        "description": "The text for the note, in markdown",
+                        "type": [
+                          "string"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "referent": {
+                "type": [
+                  "object"
+                ],
+                "raw_annotatable_url": {
+                  "description": "The original URL of the page",
+                  "type": [
+                    "string"
+                  ]
+                }
+              }
+            }
           },
           "title": "Create"
         },
@@ -623,13 +760,6 @@ module Jenius
           "method": "DELETE",
           "rel": "destroy",
           "title": "Delete"
-        },
-        {
-          "description": "Info for existing annotation.",
-          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
-          "method": "GET",
-          "rel": "self",
-          "title": "Info"
         },
         {
           "description": "List existing annotations.",
@@ -1250,6 +1380,19 @@ module Jenius
     }
   },
   "properties": {
+    "meta": {
+      "$ref": "#/definitions/meta"
+    },
+    "response": {
+      "type": [
+        "object"
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/annotation"
+        }
+      ]
+    },
     "account": {
       "$ref": "#/definitions/account"
     },

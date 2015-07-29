@@ -4,6 +4,29 @@
     "object"
   ],
   "definitions": {
+    "meta": {
+      "title": "meta",
+      "description": "FIXME meta",
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "status": {
+          "type": [
+            "integer"
+          ]
+        },
+        "message": {
+          "type": [
+            "string"
+          ]
+        }
+      }
+    },
+    "response": {
+      "title": "response",
+      "description": "FIXME response"
+    },
     "account": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "FIXME - Account",
@@ -122,8 +145,8 @@
     },
     "annotation": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "FIXME - Annotation",
-      "description": "FIXME",
+      "title": "Annotation",
+      "description": "Annotation Object",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -133,14 +156,11 @@
         "id": {
           "description": "unique identifier of annotation",
           "readOnly": true,
-          "format": "uuid",
           "type": [
-            "string"
+            "integer"
           ]
         },
-        "name": {
-          "description": "unique name of annotation",
-          "readOnly": true,
+        "text_format": {
           "type": [
             "string"
           ]
@@ -149,22 +169,73 @@
           "anyOf": [
             {
               "$ref": "#/definitions/annotation/definitions/id"
-            },
-            {
-              "$ref": "#/definitions/annotation/definitions/name"
             }
           ]
         },
-        "created_at": {
-          "description": "when annotation was created",
-          "format": "date-time",
+        "body": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/annotation/definitions/plain"
+            },
+            {
+              "$ref": "#/definitions/annotation/definitions/dom"
+            },
+            {
+              "$ref": "#/definitions/annotation/definitions/html"
+            }
+          ]
+        },
+        "plain": {
           "type": [
             "string"
           ]
         },
-        "updated_at": {
-          "description": "when annotation was updated",
-          "format": "date-time",
+        "dom": {
+          "type": [
+            "object"
+          ]
+        },
+        "html": {
+          "type": [
+            "string"
+          ]
+        },
+        "authors": {
+          "type": [
+            "object"
+          ]
+        },
+        "verified_by": {
+          "type": [
+            "object"
+          ]
+        },
+        "votes_total": {
+          "type": [
+            "integer"
+          ]
+        },
+        "share_url": {
+          "type": [
+            "string"
+          ]
+        },
+        "current_user_metadata": {
+          "type": [
+            "object"
+          ]
+        },
+        "state": {
+          "type": [
+            "string"
+          ]
+        },
+        "comment_count": {
+          "type": [
+            "integer"
+          ]
+        },
+        "url": {
           "type": [
             "string"
           ]
@@ -172,16 +243,54 @@
       },
       "links": [
         {
-          "description": "Create a new annotation.",
+          "description": "Data for a specific annotation.",
+          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "Creates a new annotation on a public web page.",
           "href": "/annotations",
           "method": "POST",
           "rel": "create",
           "schema": {
-            "properties": {
-            },
             "type": [
               "object"
-            ]
+            ],
+            "properties": {
+              "annotation": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "body": {
+                    "type": [
+                      "object"
+                    ],
+                    "properties": {
+                      "markdown": {
+                        "description": "The text for the note, in markdown",
+                        "type": [
+                          "string"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "referent": {
+                "type": [
+                  "object"
+                ],
+                "raw_annotatable_url": {
+                  "description": "The original URL of the page",
+                  "type": [
+                    "string"
+                  ]
+                }
+              }
+            }
           },
           "title": "Create"
         },
@@ -191,13 +300,6 @@
           "method": "DELETE",
           "rel": "destroy",
           "title": "Delete"
-        },
-        {
-          "description": "Info for existing annotation.",
-          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
-          "method": "GET",
-          "rel": "self",
-          "title": "Info"
         },
         {
           "description": "List existing annotations.",
@@ -818,6 +920,19 @@
     }
   },
   "properties": {
+    "meta": {
+      "$ref": "#/definitions/meta"
+    },
+    "response": {
+      "type": [
+        "object"
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/annotation"
+        }
+      ]
+    },
     "account": {
       "$ref": "#/definitions/account"
     },
