@@ -49,14 +49,28 @@ links:
   method: GET
   rel: self
   title: Info
-- description: Create a new annotation.
+- description: Creates a new annotation on a public web page.
   href: "/annotations"
   method: POST
   rel: create
   schema:
-    properties: {}
     type:
     - object
+    properties:
+      annotation:
+        type: object
+        properties:
+          body:
+            type: object
+            properties:
+              markdown:
+                description: The text for the note, in markdown
+                type: string
+      referent:
+        type: object
+        raw_annotatable_url:
+          description: The original URL of the page
+          type: string
   title: Create
 - description: Delete an existing annotation.
   href: "/annotations/{(%2Fschemata%2Fannotation%23%2Fdefinitions%2Fidentity)}"
