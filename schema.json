@@ -1,0 +1,851 @@
+{
+  "$schema": "http://interagent.github.io/interagent-hyper-schema",
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "account": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Account",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of account",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of account",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/account/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/account/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when account was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when account was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new account.",
+          "href": "/accounts",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing account.",
+          "href": "/accounts/{(%23%2Fdefinitions%2Faccount%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing account.",
+          "href": "/accounts/{(%23%2Fdefinitions%2Faccount%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing accounts.",
+          "href": "/accounts",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing account.",
+          "href": "/accounts/{(%23%2Fdefinitions%2Faccount%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/account/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/account/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/account/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/account/definitions/updated_at"
+        }
+      }
+    },
+    "annotation": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Annotation",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of annotation",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of annotation",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/annotation/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/annotation/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when annotation was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when annotation was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new annotation.",
+          "href": "/annotations",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing annotation.",
+          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing annotation.",
+          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing annotations.",
+          "href": "/annotations",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing annotation.",
+          "href": "/annotations/{(%23%2Fdefinitions%2Fannotation%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/annotation/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/annotation/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/annotation/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/annotation/definitions/updated_at"
+        }
+      }
+    },
+    "artist": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Artist",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of artist",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of artist",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/artist/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/artist/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when artist was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when artist was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new artist.",
+          "href": "/artists",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing artist.",
+          "href": "/artists/{(%23%2Fdefinitions%2Fartist%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing artist.",
+          "href": "/artists/{(%23%2Fdefinitions%2Fartist%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing artists.",
+          "href": "/artists",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing artist.",
+          "href": "/artists/{(%23%2Fdefinitions%2Fartist%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/artist/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/artist/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/artist/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/artist/definitions/updated_at"
+        }
+      }
+    },
+    "referent": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Referent",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of referent",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of referent",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/referent/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/referent/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when referent was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when referent was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new referent.",
+          "href": "/referents",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing referent.",
+          "href": "/referents/{(%23%2Fdefinitions%2Freferent%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing referent.",
+          "href": "/referents/{(%23%2Fdefinitions%2Freferent%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing referents.",
+          "href": "/referents",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing referent.",
+          "href": "/referents/{(%23%2Fdefinitions%2Freferent%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/referent/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/referent/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/referent/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/referent/definitions/updated_at"
+        }
+      }
+    },
+    "search": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Search",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of search",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of search",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/search/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/search/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when search was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when search was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new search.",
+          "href": "/searchs",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing search.",
+          "href": "/searchs/{(%23%2Fdefinitions%2Fsearch%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing search.",
+          "href": "/searchs/{(%23%2Fdefinitions%2Fsearch%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing searchs.",
+          "href": "/searchs",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing search.",
+          "href": "/searchs/{(%23%2Fdefinitions%2Fsearch%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/search/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/search/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/search/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/search/definitions/updated_at"
+        }
+      }
+    },
+    "song": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Song",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of song",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of song",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/song/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/song/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when song was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when song was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new song.",
+          "href": "/songs",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing song.",
+          "href": "/songs/{(%23%2Fdefinitions%2Fsong%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing song.",
+          "href": "/songs/{(%23%2Fdefinitions%2Fsong%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing songs.",
+          "href": "/songs",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing song.",
+          "href": "/songs/{(%23%2Fdefinitions%2Fsong%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/song/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/song/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/song/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/song/definitions/updated_at"
+        }
+      }
+    },
+    "web_page": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "FIXME - Web_page",
+      "description": "FIXME",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of web_page",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "name": {
+          "description": "unique name of web_page",
+          "readOnly": true,
+          "type": [
+            "string"
+          ]
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/web_page/definitions/id"
+            },
+            {
+              "$ref": "#/definitions/web_page/definitions/name"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when web_page was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when web_page was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new web_page.",
+          "href": "/web_pages",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create"
+        },
+        {
+          "description": "Delete an existing web_page.",
+          "href": "/web_pages/{(%23%2Fdefinitions%2Fweb_page%2Fdefinitions%2Fidentity)}",
+          "method": "DELETE",
+          "rel": "destroy",
+          "title": "Delete"
+        },
+        {
+          "description": "Info for existing web_page.",
+          "href": "/web_pages/{(%23%2Fdefinitions%2Fweb_page%2Fdefinitions%2Fidentity)}",
+          "method": "GET",
+          "rel": "self",
+          "title": "Info"
+        },
+        {
+          "description": "List existing web_pages.",
+          "href": "/web_pages",
+          "method": "GET",
+          "rel": "instances",
+          "title": "List"
+        },
+        {
+          "description": "Update an existing web_page.",
+          "href": "/web_pages/{(%23%2Fdefinitions%2Fweb_page%2Fdefinitions%2Fidentity)}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "$ref": "#/definitions/web_page/definitions/created_at"
+        },
+        "id": {
+          "$ref": "#/definitions/web_page/definitions/id"
+        },
+        "name": {
+          "$ref": "#/definitions/web_page/definitions/name"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/web_page/definitions/updated_at"
+        }
+      }
+    }
+  },
+  "properties": {
+    "account": {
+      "$ref": "#/definitions/account"
+    },
+    "annotation": {
+      "$ref": "#/definitions/annotation"
+    },
+    "artist": {
+      "$ref": "#/definitions/artist"
+    },
+    "referent": {
+      "$ref": "#/definitions/referent"
+    },
+    "search": {
+      "$ref": "#/definitions/search"
+    },
+    "song": {
+      "$ref": "#/definitions/song"
+    },
+    "web_page": {
+      "$ref": "#/definitions/web_page"
+    }
+  },
+  "description": "Genius API",
+  "links": [
+    {
+      "href": "https://api.genius.com",
+      "rel": "self"
+    }
+  ],
+  "title": "Genius API"
+}
