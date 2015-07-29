@@ -1,0 +1,3 @@
+#!/bin/bash -e
+bundle exec prmd combine --meta docs/schema/meta.yml docs/schema/schemata/ > docs/schema/schema.json
+bundle exec heroics-generate Jenius docs/schema/schema.json https://api.genius.com > lib/jenius/client.rb
