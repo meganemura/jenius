@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Web_page
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of web_page
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of web_page
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/web_page#/definitions/id"
+    - "$ref": "/schemata/web_page#/definitions/name"
+  created_at:
+    description: when web_page was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when web_page was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new web_page.
+  href: "/web_pages"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing web_page.
+  href: "/web_pages/{(%2Fschemata%2Fweb_page%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing web_page.
+  href: "/web_pages/{(%2Fschemata%2Fweb_page%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing web_pages.
+  href: "/web_pages"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing web_page.
+  href: "/web_pages/{(%2Fschemata%2Fweb_page%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/web_page#/definitions/created_at"
+  id:
+    "$ref": "/schemata/web_page#/definitions/id"
+  name:
+    "$ref": "/schemata/web_page#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/web_page#/definitions/updated_at"
+id: schemata/web_page
