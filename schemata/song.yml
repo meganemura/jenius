@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Song
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of song
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of song
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/song#/definitions/id"
+    - "$ref": "/schemata/song#/definitions/name"
+  created_at:
+    description: when song was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when song was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new song.
+  href: "/songs"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing song.
+  href: "/songs/{(%2Fschemata%2Fsong%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing song.
+  href: "/songs/{(%2Fschemata%2Fsong%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing songs.
+  href: "/songs"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing song.
+  href: "/songs/{(%2Fschemata%2Fsong%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/song#/definitions/created_at"
+  id:
+    "$ref": "/schemata/song#/definitions/id"
+  name:
+    "$ref": "/schemata/song#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/song#/definitions/updated_at"
+id: schemata/song
