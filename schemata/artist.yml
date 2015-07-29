@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Artist
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of artist
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of artist
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/artist#/definitions/id"
+    - "$ref": "/schemata/artist#/definitions/name"
+  created_at:
+    description: when artist was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when artist was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new artist.
+  href: "/artists"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing artist.
+  href: "/artists/{(%2Fschemata%2Fartist%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing artist.
+  href: "/artists/{(%2Fschemata%2Fartist%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing artists.
+  href: "/artists"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing artist.
+  href: "/artists/{(%2Fschemata%2Fartist%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/artist#/definitions/created_at"
+  id:
+    "$ref": "/schemata/artist#/definitions/id"
+  name:
+    "$ref": "/schemata/artist#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/artist#/definitions/updated_at"
+id: schemata/artist
