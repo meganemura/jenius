@@ -1,0 +1,78 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: FIXME - Account
+description: FIXME
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of account
+    readOnly: true
+    format: uuid
+    type:
+    - string
+  name:
+    description: unique name of account
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+    - "$ref": "/schemata/account#/definitions/id"
+    - "$ref": "/schemata/account#/definitions/name"
+  created_at:
+    description: when account was created
+    format: date-time
+    type:
+    - string
+  updated_at:
+    description: when account was updated
+    format: date-time
+    type:
+    - string
+links:
+- description: Create a new account.
+  href: "/accounts"
+  method: POST
+  rel: create
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Create
+- description: Delete an existing account.
+  href: "/accounts/{(%2Fschemata%2Faccount%23%2Fdefinitions%2Fidentity)}"
+  method: DELETE
+  rel: destroy
+  title: Delete
+- description: Info for existing account.
+  href: "/accounts/{(%2Fschemata%2Faccount%23%2Fdefinitions%2Fidentity)}"
+  method: GET
+  rel: self
+  title: Info
+- description: List existing accounts.
+  href: "/accounts"
+  method: GET
+  rel: instances
+  title: List
+- description: Update an existing account.
+  href: "/accounts/{(%2Fschemata%2Faccount%23%2Fdefinitions%2Fidentity)}"
+  method: PATCH
+  rel: update
+  schema:
+    properties: {}
+    type:
+    - object
+  title: Update
+properties:
+  created_at:
+    "$ref": "/schemata/account#/definitions/created_at"
+  id:
+    "$ref": "/schemata/account#/definitions/id"
+  name:
+    "$ref": "/schemata/account#/definitions/name"
+  updated_at:
+    "$ref": "/schemata/account#/definitions/updated_at"
+id: schemata/account
